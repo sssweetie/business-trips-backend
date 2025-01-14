@@ -1,0 +1,424 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Business Trip Management API",
+    "version": "1.0.0",
+    "description": "API для управления командировками, городами, расходами и пользователями."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/business-trips": {
+      "post": {
+        "summary": "Создать новую командировку",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessTrip"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Командировка успешно создана"
+          },
+          "500": {
+            "description": "Ошибка при создании командировки"
+          }
+        }
+      },
+      "get": {
+        "summary": "Получить список всех командировок",
+        "responses": {
+          "200": {
+            "description": "Список командировок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BusinessTrip"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка при получении командировок"
+          }
+        }
+      }
+    },
+    "/business-trips/{id}": {
+      "put": {
+        "summary": "Обновить командировку",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID командировки"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessTrip"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Командировка успешно обновлена"
+          },
+          "500": {
+            "description": "Ошибка при обновлении командировки"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удалить командировку",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID командировки"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Командировка успешно удалена"
+          },
+          "500": {
+            "description": "Ошибка при удалении командировки"
+          }
+        }
+      }
+    },
+    "/cities": {
+      "get": {
+        "summary": "Получить список всех городов",
+        "responses": {
+          "200": {
+            "description": "Список городов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/City"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка при получении городов"
+          }
+        }
+      }
+    },
+    "/expenses": {
+      "post": {
+        "summary": "Создать новый расход",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Expense"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Расход успешно создан"
+          },
+          "500": {
+            "description": "Ошибка при создании расхода"
+          }
+        }
+      },
+      "get": {
+        "summary": "Получить список всех расходов",
+        "responses": {
+          "200": {
+            "description": "Список расходов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Expense"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка при получении расходов"
+          }
+        }
+      }
+    },
+    "/expenses/{id}": {
+      "put": {
+        "summary": "Обновить расход",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID расхода"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Expense"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Расход успешно обновлен"
+          },
+          "500": {
+            "description": "Ошибка при обновлении расхода"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удалить расход",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID расхода"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Расход успешно удален"
+          },
+          "500": {
+            "description": "Ошибка при удалении расхода"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Создать нового пользователя",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Пользователь успешно создан"
+          },
+          "500": {
+            "description": "Ошибка при создании пользователя"
+          }
+        }
+      },
+      "get": {
+        "summary": "Получить список всех пользователей",
+        "responses": {
+          "200": {
+            "description": "Список пользователей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка при получении пользователей"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "summary": "Обновить пользователя",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID пользователя"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно обновлен"
+          },
+          "500": {
+            "description": "Ошибка при обновлении пользователя"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удалить пользователя",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID пользователя"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно удален"
+          },
+          "500": {
+            "description": "Ошибка при удалении пользователя"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BusinessTrip": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "ID пользователя"
+          },
+          "city": {
+            "type": "string",
+            "description": "ID города"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата начала командировки"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата окончания командировки"
+          },
+          "expenses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Список расходов"
+          },
+          "purpose": {
+            "type": "string",
+            "description": "Цель командировки"
+          }
+        }
+      },
+      "City": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Название города"
+          },
+          "country": {
+            "type": "string",
+            "description": "Страна"
+          }
+        }
+      },
+      "Expense": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Тип расхода (например, проживание, питание)"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Сумма расхода"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание расхода"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Имя пользователя"
+          },
+          "email": {
+            "type": "string",
+            "description": "Электронная почта пользователя"
+          },
+          "position": {
+            "type": "string",
+            "description": "Должность пользователя"
+          }
+        }
+      }
+    }
+  }
+}
